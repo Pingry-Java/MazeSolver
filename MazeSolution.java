@@ -1,10 +1,10 @@
 import java.util.List;
 
-public abstract class MazeSolution {
+public abstract class MazeSolution{
   
   private Maze maze;
   
-  public MazeSolution(Maze m) {
+  public MazeSolution(Maze m){
     maze = m;
   }
   
@@ -12,7 +12,8 @@ public abstract class MazeSolution {
    * The maze to be solved.
    * @return The maze to be solved.
    */
-  public Maze getMaze() {
+  public Maze getMaze()
+  {
     return maze;
   }
   
@@ -29,8 +30,8 @@ public abstract class MazeSolution {
 	 * number if the maze is impossible.
 	 * @return The total effort
 	 */
-	public int travelEffort() {
-	  
+	public int travelEffort() 
+	{  
 	  int effort = 0;
 	  
 	  for (Node n : path())
