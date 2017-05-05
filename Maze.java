@@ -3,6 +3,16 @@ public abstract class Maze {
 	private Node start;
 	private Node finish;
 	
+	/**
+	 * Default constructor for use by any subclasses
+	 * @param start The starting Node
+	 * @param finish The finishing Node
+	 */
+	 public Maze(Node start, Node finish)
+	 {
+	 	this.start = start; 
+	 	this.finish = finish; 
+	 }
 	
 	/**
 	 * The Starting Node
