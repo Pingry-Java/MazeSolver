@@ -1,4 +1,4 @@
-public class MazeSolver extends MazeSolution
+public class DepthFirstMazeSolver extends MazeSolution
 {
 	public MazeSolver(Maze m)
 	{
