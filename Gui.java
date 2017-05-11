@@ -48,6 +48,11 @@ public class Gui{
 		panel.add(solveMaze);
 		solveMaze.addActionListener(new Action("To be Implemented"));	
 
+
+		JLabel label = new JLabel("Hello World");
+		label.setBounds(300, 300, 100, 100);
+		panel.add(label);
+
 	}
 	static class Action implements ActionListener{
 		private String message; 
