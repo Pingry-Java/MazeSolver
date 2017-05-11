@@ -3,11 +3,11 @@
 ## Debrief after AP Exam
 
 * Return any exams you borrowed to study
-* REflect on how the exam went, what was hard, what wasn't, etc
+* Reflect on how the exam went, what was hard, what wasn't, etc
 
 ## Talk about Maze Solver
 
-* Fisrt time ever running this project
+* First time ever running this project
   * Hoping it is fun and educational
   * Please buy in and don't be lazy
   * I'll consider all suggestions
@@ -19,6 +19,60 @@
     * Close issues when you fix them
   * Only commit good work
     * Test thoroughly before you commit
-    * use `git diff` to make sure you've only changed what you intended
+    * Use `git diff` to make sure you've only changed what you intended
   * Small commits
   * API Changes
+
+# Day 2
+
+* Get to know the API
+* Begin planning with your team
+* Make a few preliminary commits
+
+# Day 3 -- Daily Routine and Grading
+
+## Text editor
+
+On most systems (maybe not windows?) git uses vim as the default editor.
+So you need to do one of the following:
+
+1. Learn to use vim: http://vimsheet.com/
+2. Change your editor: http://stackoverflow.com/questions/3539594
+
+## Daily Routine
+
+* Pull
+* Review Issues, Readme
+* Make goals for today
+* Do some work
+  * Make a new branch
+  * Code, test, commit, repeat
+  * Merge Back to master
+  * Push
+* Reflect on daily golas, issue queue, readme
+
+## Grading
+
+This is postAP we're here to learn and have fun, not stress out. 
+But I also expect quality work and buy-in, so there will be some grading.
+
+* Commits graded on a 5 point scale
+* Defaults to get all 5 points
+  * hint: use `git diff--cached` to see what you're about to commit
+* Deductions
+  * Poor commit message
+  * Extraneous changes included
+  * Undocumented API changes or additions
+  * Commit clearly unnecessary or seemingly made by accident
+
+## API Changes and additions
+
+Applies to `Maze`, `MazoSolution`, and `Node`.
+
+* Changes -- When a method, or constructor in  changes signature or behavior
+  * Must be proposed in the issue queue and approved by members of both other subteams
+* Additions -- When new methods or constructors are added
+  * Must be proposed in the issue queue and approved by a member of at least one other sub team
+
+
+
