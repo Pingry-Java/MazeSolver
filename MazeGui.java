@@ -51,12 +51,15 @@ public class MazeGui{
 
 		String answer = ""; 
 		SampleMaze maze = new SampleMaze(4, 4);
+		answer += "<html>";
 		for (int n = 0; n < 4; n++){
+
 			for (int i = 0; i < 4; i++){
 				answer += maze.getNodeByCoords(n, i).symbol();
 			}
-			answer += "\n";
+			answer += "<br>";
 		}
+		answer += "</html>";
 		System.out.println(answer);
 		JLabel lab = new JLabel(answer);
 
