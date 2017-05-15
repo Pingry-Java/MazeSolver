@@ -13,11 +13,6 @@ public class MazeSquare extends Node
 		this.slowness = slowness; 
 	}
 	
-	public List<Node> getNeighbors()
-	{
-		return null; //just for testing purposes
-	}
-	
 	public int getX()
 	{
 		return x; 
@@ -31,6 +26,11 @@ public class MazeSquare extends Node
 	public int slowness()
 	{
 		return slowness; 
+	}
+	
+	public void setSlowness(int slowness)
+	{
+		this.slowness = slowness; 
 	}
 	
 }
