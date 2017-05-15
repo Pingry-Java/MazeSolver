@@ -1,52 +1,60 @@
+import java.util.List;
 public class DepthFirstMazeSolver extends MazeSolution
 {
-	public MazeSolver(Maze m)
+	List<Node> traveled;
+	public DepthFirstMazeSolver(Maze m)
 	{
 		super(m);
+		traveled = new List<Node>();
 	}
 	
-	public List<Node> path(int row, int col, boolean[][] travelled, Maze m)
+	public List<Node> path(){
+		return pathFinder(m.getStart());
+	}
+	
+	public List<Node> pathFinder(Node n)
 	{	
 		List<Node> l = new List<Node>();
-		Node n = m.getNodeByCoords(row, col);
 		
-		if(travelled[row][col])
+		for(int i = 0; i<traveled.length(); i++)
 		{
+			if(traveled.get(i)==n){
+				return l;
+			}
+		}
+		
+		traveled.add(n);
+		
+		if (m.getFinish().equals(n))
+		{
+			l.add(n);
 			return l;
 		}
 		
-		travelled[row][col] = true;
+		List<Node> pathUp = path(n.getNeighbors().get(0));
+		List<Node> pathDown = path(n.getNeighbors().get(2));
+		List<Node> pathLeft = path(n.getNeighbors().get(3));
+		List<Node> pathRight = path(n.getNeighbors().get(1));
 		
-		if (m.getFinish().equals(n)
-		{
-			l.add(n)
-			return l;
-		}
-		
-		List<Node> pathUp = path(row+1, col, travelled, finish);
-		List<Node> pathDown = path(row-1, col, travelled, finish);
-		List<Node> pathLeft = path(row, col+1, travelled, finish);
-		List<Node> pathRight = path(row, col-1, travelled, finish);
-		
-		if ((pathUp.length()>6) && (pathUp.substring(pathUp.length()-6, pathUp.length()).equals("finish")))
+		if ((pathUp.get(pathUp.length()-1)==m.getFinish())
 		{
 			l.add(n);
 			l.add(pathUp);
 			return l;
 		}
-		if ((pathDown.length()>6) && (pathUp.substring(pathDown.length()-6, pathDown.length()).equals("finish")))
+		if ((pathDown.get(pathDown.length()-1)==m.getFinish())
 		{
 			l.add(n);
 			l.add(pathDown);
 			return l;
 		}
-		if ((pathLeft.length()>6) && (pathUp.substring(pathLeft.length()-6, pathLeft.length()).equals("finish")))
+		if ((pathLeft.get(pathLeft.length()-1)==m.getFinish())
 		{
 			l.add(n);
 			l.add(pathLeft);
 			return l;
 		}
-		if ((pathRight.length()>6) && (pathUp.substring(pathRight.length()-6, pathRight.length()).equals("finish")))
+		if ((pathRight.get(pathRight.length()-1)==m.getFinish())
 		{
 			l.add(n);
 			l.add(pathRight);
