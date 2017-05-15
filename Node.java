@@ -2,13 +2,6 @@ import java.util.List;
 
 public abstract class Node {
 
-	/**
-	 * All adjascent Nodes in the maze. An implementation may, but is not required
-	 * to, include impassible adjascent nodes in this list.
-	 * 
-	 * @return A List of all neighbors
-	 */
-	public abstract List<Node> getNeighbors();
 	
 	/**
 	 * A suggested char to visually represent the Node. Many UIs will find this
