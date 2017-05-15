@@ -67,6 +67,17 @@ public abstract class Maze {
 	 */
 	public abstract Node getNodeByCoords(int x, int y);
 	
+	
+	/**
+	 * All adjascent Nodes in the maze. An implementation may, but is not required
+	 * to, include impassible adjascent nodes in this list.
+	 * 
+	 * @param current The Node that we are looking for neighbors 
+	 * @return A List of all neighbors
+	 */
+	public abstract List<Node> getNeighbors(Node current);
+	
+	
 	/**
 	 * A string representation of the Maze
 	 * 
