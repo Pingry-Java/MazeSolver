@@ -22,7 +22,7 @@ public class Gui{
 		JFrame frame = new JFrame("Test");
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500,500);
+		frame.setSize(770, 700);
 		frame.setResizable(false);
 
 		JPanel panel = new JPanel();
@@ -30,23 +30,28 @@ public class Gui{
 
 		JButton loadNewMaze = new JButton("Load New Maze");
 		panel.setLayout(null);
-		loadNewMaze.setBounds(50, 400, 100, 50);
+		loadNewMaze.setBounds(50, 600, 150, 50);
 		panel.add(loadNewMaze);
 		loadNewMaze.addActionListener(new Action("To be Implemented"));
 
 
 		JButton loadSavedMaze = new JButton("Load Saved Maze");
 		panel.setLayout(null);
-		loadSavedMaze.setBounds(200, 400, 100, 50);
+		loadSavedMaze.setBounds(300, 600, 150, 50);
 		panel.add(loadSavedMaze);
 		loadSavedMaze.addActionListener(new Action("To be Implemented"));	
 
 
 		JButton solveMaze = new JButton("Solve Maze");
 		panel.setLayout(null);
-		solveMaze.setBounds(350, 400, 100, 50);
+		solveMaze.setBounds(550, 600, 150, 50);
 		panel.add(solveMaze);
 		solveMaze.addActionListener(new Action("To be Implemented"));	
+
+
+		JLabel label = new JLabel("Hello World");
+		label.setBounds(300, 300, 100, 100);
+		panel.add(label);
 
 	}
 	static class Action implements ActionListener{

@@ -75,4 +75,27 @@ Applies to `Maze`, `MazoSolution`, and `Node`.
   * Must be proposed in the issue queue and approved by a member of at least one other sub team
 
 
+# Day 4 -- Some Goals to Consider
 
+## GUI Group
+
+* Does the frame show controls correctly on OSX? See issue
+* Most GUIs write their own subclass of JFrame
+* Try to display an actual maze
+  * You may need to pester the maze generation group about implementing the recommended character functionality
+
+## Solver Group
+
+* Maybe split into smaller groups
+* Test out a completed solver
+* Continue working on a second solver?
+* Work with Maze creation group to resolve getNeighbors API issue
+
+## Maze Creation Group
+
+* Resolve getNeighbors API issue
+* Consider implementing suggested character functionality so GUI group can use it
+* Generate random Maze
+  * Remember, not all maze's need to be solvable or have unique solutions. This will be more fun for the solver team if their algorithm has to detect impossible mazes or mazes with multiple solutions
+* Consider a feature to save mazes
+  * eg one is randomly generated, and the user likes it and wants to look into it more later. How can she save it to a file?
