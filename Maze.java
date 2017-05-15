@@ -1,3 +1,5 @@
+import java.util.*; 
+
 public abstract class Maze {
 	
 	private Node start;

@@ -35,4 +35,8 @@ public abstract class Node {
 	public int danger() {
 	  return 0;
 	}
+	
+	public abstract int getX(); 
+	
+	public abstract int getY(); 
 }
