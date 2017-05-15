@@ -35,9 +35,25 @@ public class SampleMaze extends Maze
 	
 	public Node getNodeByCoords(int x, int y)
 	{
+		if (x < 0 || x > 3 || y < 0 || y > 3)
+			return null; 
 		return maze[x][y]; 
 	}
 	
+	//Order will be left, right, above, below. Puts null if no neighbor on that side
+	public List<Node> getNeighbors(Node current)
+	{
+		List<Node> neighbors = new ArrayList<Node>(); 
+		int x = current.getX(); 
+		int y = current.getY(); 
+		
+		neighbors.add(getNodeByCoords(x, y - 1)); //Node to the left
+		neighbors.add(getNodeByCoords(x, y + 1)); //Node to the right
+		neighbors.add(getNodeByCoords(x - 1, y)); //Node above
+		neighbors.add(getNodeByCoords(x + 1, y)); //Node below
+		
+		return neighbors; 
+	}
 	
 	
 }
