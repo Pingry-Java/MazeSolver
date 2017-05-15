@@ -1,3 +1,5 @@
+import java.util.*; 
+
 public class SampleMaze extends Maze
 {
 	private Node[][] maze; 
