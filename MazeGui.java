@@ -40,30 +40,35 @@ public class MazeGui{
 		panel.setLayout(null);
 		loadSavedMaze.setBounds(300, 600, 150, 50);
 		panel.add(loadSavedMaze);
-		loadSavedMaze.addActionListener(new LoadNewMaze(panel));	
+		loadSavedMaze.addActionListener(new LoadSavedMaze(panel));	
 
 
 		JButton solveMaze = new JButton("Solve Maze");
 		panel.setLayout(null);
 		solveMaze.setBounds(550, 600, 150, 50);
 		panel.add(solveMaze);
-		solveMaze.addActionListener(new LoadNewMaze(panel));	
+		solveMaze.addActionListener(new SolveMaze(panel));	
 
 
 
 	}
-	static class LoadNewMaze implements ActionListener{
+	static class LoadSavedMaze implements ActionListener
+	{ //TODO change code so this loads a saved maze
 		private JPanel panel;
-		public LoadNewMaze(JPanel panel){
+		public LoadSavedMaze(JPanel panel)
+		{
 			this.panel = panel; 
 		}
-		public void actionPerformed(ActionEvent e){
+		public void actionPerformed(ActionEvent e)
+		{
 			String answer = ""; 
 			SampleMaze maze = new SampleMaze(4, 4);
 			answer += "<html>";
-			for (int n = 0; n < 4; n++){
+			for (int n = 0; n < 4; n++)
+			{
 
-				for (int i = 0; i < 4; i++){
+				for (int i = 0; i < 4; i++)
+				{
 					answer += maze.getNodeByCoords(n, i).symbol();
 				}
 				answer += "<br>";
@@ -76,4 +81,65 @@ public class MazeGui{
 		}
 		
 	}	
+	
+	static class SolveMaze implements ActionListener
+	{ //Code to be changed
+		private JPanel panel;
+		public SolveMaze(JPanel panel)
+		{
+			this.panel = panel; 
+		}
+		public void actionPerformed(ActionEvent e)
+		{
+			String answer = ""; 
+			SampleMaze maze = new SampleMaze(4, 4);
+			answer += "<html>";
+			for (int n = 0; n < 4; n++)
+			{
+
+				for (int i = 0; i < 4; i++)
+				{
+					answer += maze.getNodeByCoords(n, i).symbol();
+				}
+				answer += "<br>";
+			}
+			answer += "</html>";
+			JLabel lab = new JLabel(answer);
+
+			panel.add(lab);
+			lab.setBounds(300, 300, 100, 100);
+		}
+		
+	}	
+	
+	static class LoadNewMaze implements ActionListener
+	{
+		private JPanel panel;
+		public LoadNewMaze(JPanel panel)
+		{
+			this.panel = panel; 
+		}
+		public void actionPerformed(ActionEvent e)
+		{
+			String answer = ""; 
+			SampleMaze maze = new SampleMaze(4, 4);
+			answer += "<html>";
+			for (int n = 0; n < 4; n++)
+			{
+
+				for (int i = 0; i < 4; i++)
+				{
+					answer += maze.getNodeByCoords(n, i).symbol();
+				}
+				answer += "<br>";
+			}
+			answer += "</html>";
+			JLabel lab = new JLabel(answer);
+
+			panel.add(lab);
+			lab.setBounds(300, 300, 100, 100);
+		
+		
+		}	
+	}
 }
