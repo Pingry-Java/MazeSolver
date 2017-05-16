@@ -33,54 +33,47 @@ public class MazeGui{
 		panel.setLayout(null);
 		loadNewMaze.setBounds(50, 600, 150, 50);
 		panel.add(loadNewMaze);
-		loadNewMaze.addActionListener(new Action("To be Implemented"));
+		loadNewMaze.addActionListener(new LoadNewMaze(panel));
 
 
 		JButton loadSavedMaze = new JButton("Load Saved Maze");
 		panel.setLayout(null);
 		loadSavedMaze.setBounds(300, 600, 150, 50);
 		panel.add(loadSavedMaze);
-		loadSavedMaze.addActionListener(new Action("To be Implemented"));	
+		loadSavedMaze.addActionListener(new LoadNewMaze(panel));	
 
 
 		JButton solveMaze = new JButton("Solve Maze");
 		panel.setLayout(null);
 		solveMaze.setBounds(550, 600, 150, 50);
 		panel.add(solveMaze);
-		solveMaze.addActionListener(new Action("To be Implemented"));	
+		solveMaze.addActionListener(new LoadNewMaze(panel));	
 
-		String answer = ""; 
-		SampleMaze maze = new SampleMaze(4, 4);
-		answer += "<html>";
-		for (int n = 0; n < 4; n++){
 
-			for (int i = 0; i < 4; i++){
-				answer += maze.getNodeByCoords(n, i).symbol();
-			}
-			answer += "<br>";
-		}
-		answer += "</html>";
-		System.out.println(answer);
-		JLabel lab = new JLabel(answer);
-
-		panel.add(lab);
-		lab.setBounds(300, 300, 100, 100);
-		
 
 	}
-	static class Action implements ActionListener{
-		private String message; 
-		public Action(String str){
-			message = str;
+	static class LoadNewMaze implements ActionListener{
+		private JPanel panel;
+		public LoadNewMaze(JPanel panel){
+			this.panel = panel; 
 		}
 		public void actionPerformed(ActionEvent e){
-			JFrame frame2 = new JFrame("Clicked");
-			frame2.setVisible(true);
-			frame2.setSize(200, 200);
-			JPanel panel = new JPanel();
-			JLabel label = new JLabel("HELLO");
-			frame2.add(panel);
-			frame2.add(label);
+			String answer = ""; 
+			SampleMaze maze = new SampleMaze(4, 4);
+			answer += "<html>";
+			for (int n = 0; n < 4; n++){
+
+				for (int i = 0; i < 4; i++){
+					answer += maze.getNodeByCoords(n, i).symbol();
+				}
+				answer += "<br>";
+			}
+			answer += "</html>";
+			JLabel lab = new JLabel(answer);
+
+			panel.add(lab);
+			lab.setBounds(300, 300, 100, 100);
 		}
+		
 	}	
 }
