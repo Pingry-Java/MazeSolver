@@ -42,4 +42,9 @@ public abstract class Node {
 	public int danger() {
 	  return 0;
 	}
+	
+	/**
+	 * Returns a string representation of a Node (x and y coordinates)
+	 */
+	 public abstract String toString(); 
 }
