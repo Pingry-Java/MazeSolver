@@ -32,5 +32,9 @@ public class MazeSquare extends Node
 	{
 		this.slowness = slowness; 
 	}
+	public String toString()
+	{
+		return "(" + x + ", " + y + ")"; 
+	}
 	
 }

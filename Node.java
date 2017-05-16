@@ -36,7 +36,12 @@ public abstract class Node {
 	  return 0;
 	}
 	
+
 	public abstract int getX(); 
 	
 	public abstract int getY(); 
+	/**
+	 * Returns a string representation of a Node (x and y coordinates)
+	 */
+	 public abstract String toString(); 
 }
