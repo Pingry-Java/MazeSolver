@@ -54,29 +54,34 @@ public class DepthFirstMazeSolver extends MazeSolution
 		ArrayList<Node> pathLeft = pathFinder(super.getMaze().getNeighbors(n).get(3));
 		ArrayList<Node> pathRight = pathFinder(super.getMaze().getNeighbors(n).get(1));
 		
-		if ((pathUp.size()!=0)&&((pathUp.get(pathUp.size()-1)==super.getMaze().getFinish())))
-		{
-			l.add(n);
-			l.addAll(pathUp);
-			return l;
+		if ((pathUp.size()!=0)&&((pathUp.get(pathUp.size()-1).getX()==super.getMaze().getFinish().getX()))){
+			if ((pathUp.size()!=0)&&((pathUp.get(pathUp.size()-1).getY()==super.getMaze().getFinish().getY()))){
+				l.add(n);
+				l.addAll(pathUp);
+				return l;
+			}
 		}
-		if ((pathDown.size()!=0)&&((pathDown.get(pathDown.size()-1)==super.getMaze().getFinish())))
-		{
-			l.add(n);
-			l.addAll(pathDown);
-			return l;
+		
+		if ((pathDown.size()!=0)&&((pathDown.get(pathDown.size()-1).getX()==super.getMaze().getFinish().getX()))){
+			if ((pathDown.size()!=0)&&((pathDown.get(pathDown.size()-1).getY()==super.getMaze().getFinish().getY()))){
+				l.add(n);
+				l.addAll(pathDown);
+				return l;
+			}
 		}
-		if ((pathLeft.size()!=0)&&((pathLeft.get(pathLeft.size()-1)==super.getMaze().getFinish())))
-		{
-			l.add(n);
-			l.addAll(pathLeft);
-			return l;
+		if ((pathLeft.size()!=0)&&((pathLeft.get(pathLeft.size()-1).getX()==super.getMaze().getFinish().getX()))){
+			if ((pathLeft.size()!=0)&&((pathLeft.get(pathLeft.size()-1).getY()==super.getMaze().getFinish().getY()))){
+				l.add(n);
+				l.addAll(pathLeft);
+				return l;
+			}
 		}
-		if ((pathRight.size()!=0)&&((pathRight.get(pathRight.size()-1)==super.getMaze().getFinish())))
-		{
-			l.add(n);
-			l.addAll(pathRight);
-			return l;
+		if ((pathRight.size()!=0)&&((pathRight.get(pathRight.size()-1).getX()==super.getMaze().getFinish().getX()))){
+			if ((pathRight.size()!=0)&&((pathRight.get(pathRight.size()-1).getY()==super.getMaze().getFinish().getY()))){
+				l.add(n);
+				l.addAll(pathRight);
+				return l;
+			}
 		}
 		return l;
 	}
