@@ -1,22 +1,23 @@
-import java.util.List;
+import java.util.ArrayList;
 public class DepthFirstMazeSolver extends MazeSolution
 {
-	List<Node> traveled;
+	
+	ArrayList<Node> traveled;
 	public DepthFirstMazeSolver(Maze m)
 	{
 		super(m);
-		traveled = new List<Node>();
+		traveled = new ArrayList<Node>();
 	}
 	
 	public List<Node> path(){
-		return pathFinder(m.getStart());
+		return pathFinder(super.getMaze().getStart());
 	}
 	
-	public List<Node> pathFinder(Node n)
+	public ArrayList<Node> pathFinder(Node n)
 	{	
-		List<Node> l = new List<Node>();
+		ArrayList<Node> l = new ArrayList<Node>();
 		
-		for(int i = 0; i<traveled.length(); i++)
+		for(int i = 0; i<traveled.size(); i++)
 		{
 			if(traveled.get(i)==n){
 				return l;
@@ -25,36 +26,40 @@ public class DepthFirstMazeSolver extends MazeSolution
 		
 		traveled.add(n);
 		
-		if (m.getFinish().equals(n))
+		if (n.slowness()<0){
+			return l;
+		}
+		
+		if (super.getMaze().getFinish()==n)
 		{
 			l.add(n);
 			return l;
 		}
 		
-		List<Node> pathUp = path(n.getNeighbors().get(0));
-		List<Node> pathDown = path(n.getNeighbors().get(2));
-		List<Node> pathLeft = path(n.getNeighbors().get(3));
-		List<Node> pathRight = path(n.getNeighbors().get(1));
+		ArrayList<Node> pathUp = pathFinder(super.getMaze().getNeighbors(n).get(0));
+		ArrayList<Node> pathDown = pathFinder(super.getMaze().getNeighbors(n).get(2));
+		ArrayList<Node> pathLeft = pathFinder(super.getMaze().getNeighbors(n).get(3));
+		ArrayList<Node> pathRight = pathFinder(super.getMaze().getNeighbors(n).get(1));
 		
-		if ((pathUp.get(pathUp.length()-1)==m.getFinish())
+		if ((pathUp.get(pathUp.size()-1)==super.getMaze().getFinish()))
 		{
 			l.add(n);
 			l.add(pathUp);
 			return l;
 		}
-		if ((pathDown.get(pathDown.length()-1)==m.getFinish())
+		if ((pathDown.get(pathDown.size()-1)==super.getMaze().getFinish()))
 		{
 			l.add(n);
 			l.add(pathDown);
 			return l;
 		}
-		if ((pathLeft.get(pathLeft.length()-1)==m.getFinish())
+		if ((pathLeft.get(pathLeft.size()-1)==super.getMaze().getFinish()))
 		{
 			l.add(n);
 			l.add(pathLeft);
 			return l;
 		}
-		if ((pathRight.get(pathRight.length()-1)==m.getFinish())
+		if ((pathRight.get(pathRight.size()-1)==super.getMaze().getFinish()))
 		{
 			l.add(n);
 			l.add(pathRight);
