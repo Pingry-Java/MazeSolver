@@ -23,12 +23,6 @@ public class DepthFirstMazeSolver extends MazeSolution
 			return l;
 		}
 		
-		System.out.println(n);
-		System.out.println(super.getMaze().getFinish());
-		
-		System.out.println(n.getX()-super.getMaze().getFinish().getX());
-		System.out.println(n.getY()-super.getMaze().getFinish().getY());
-		
 		for(int i = 0; i<traveled.size(); i++)
 		{
 			if(traveled.get(i)==n){
@@ -44,7 +38,6 @@ public class DepthFirstMazeSolver extends MazeSolution
 		
 		if ((super.getMaze().getFinish().getX()==n.getX())&&(super.getMaze().getFinish().getY()==n.getY()))
 		{
-			System.out.println(n);
 			l.add(n);
 			return l;
 		}
