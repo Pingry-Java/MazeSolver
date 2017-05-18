@@ -1,6 +1,7 @@
 import java.util.*; 
+import java.io.Serializable;
 
-public abstract class Maze {
+public abstract class Maze implements Serializable{
 	
 	private Node start;
 	private Node finish;
