@@ -99,3 +99,13 @@ Applies to `Maze`, `MazoSolution`, and `Node`.
   * Remember, not all maze's need to be solvable or have unique solutions. This will be more fun for the solver team if their algorithm has to detect impossible mazes or mazes with multiple solutions
 * Consider a feature to save mazes
   * eg one is randomly generated, and the user likes it and wants to look into it more later. How can she save it to a file?
+
+# Day 5 
+
+Orndorff Absent. Good luck!
+
+# Day 6
+
+* Status update?
+* Two new issues
+* Let's write some goals for today
