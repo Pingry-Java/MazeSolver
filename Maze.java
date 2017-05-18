@@ -73,11 +73,23 @@ public abstract class Maze {
 	/**
 	 * All adjascent Nodes in the maze. An implementation may, but is not required
 	 * to, include impassible adjascent nodes in this list.
-	 * 
+	 * Order will be left, right, above, below. Puts null if no neighbor on that side
 	 * @param current The Node that we are looking for neighbors 
 	 * @return A List of all neighbors
 	 */
-	public abstract List<Node> getNeighbors(Node current);
+	public List<Node> getNeighbors(Node current)
+	{
+		List<Node> neighbors = new ArrayList<Node>(); 
+		int x = current.getX(); 
+		int y = current.getY(); 
+		
+		neighbors.add(getNodeByCoords(x, y - 1)); //Node to the left
+		neighbors.add(getNodeByCoords(x, y + 1)); //Node to the right
+		neighbors.add(getNodeByCoords(x - 1, y)); //Node above
+		neighbors.add(getNodeByCoords(x + 1, y)); //Node below
+		
+		return neighbors; 
+	}
 	
 	
 	/**
