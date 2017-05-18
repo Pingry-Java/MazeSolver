@@ -22,7 +22,7 @@ public class MazeGui{
 		JFrame frame = new JFrame("Test");
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(770,700);
+		frame.setSize(1000,1000);
 		frame.setResizable(false);
 
 		JPanel panel = new JPanel();
@@ -31,21 +31,21 @@ public class MazeGui{
 
 		JButton loadNewMaze = new JButton("Load New Maze");
 		panel.setLayout(null);
-		loadNewMaze.setBounds(50, 600, 150, 50);
+		loadNewMaze.setBounds(100, 700, 150, 50);
 		panel.add(loadNewMaze);
 		loadNewMaze.addActionListener(new LoadNewMaze(panel));
 
 
 		JButton loadSavedMaze = new JButton("Load Saved Maze");
 		panel.setLayout(null);
-		loadSavedMaze.setBounds(300, 600, 150, 50);
+		loadSavedMaze.setBounds(400, 700, 150, 50);
 		panel.add(loadSavedMaze);
 		loadSavedMaze.addActionListener(new LoadSavedMaze(panel));	
 
 
 		JButton solveMaze = new JButton("Solve Maze");
 		panel.setLayout(null);
-		solveMaze.setBounds(550, 600, 150, 50);
+		solveMaze.setBounds(700, 700, 150, 50);
 		panel.add(solveMaze);
 		solveMaze.addActionListener(new SolveMaze(panel));	
 
@@ -77,8 +77,19 @@ public class MazeGui{
 			JLabel lab = new JLabel(answer);
 
 			panel.add(lab);
-			lab.setBounds(300, 300, 100, 100);
+			lab.setBounds(getStartHoriz(maze), getStartVert(maze), 100, 100);
+            
 		}
+        
+        public int getStartHoriz(SampleMaze maze)
+            {
+                return 500 - (maze.width()/2);
+            }
+            
+            public int getStartVert(SampleMaze maze)
+            {
+                return 300 + (maze.height()/2);
+            }
 		
 	}	
 	
