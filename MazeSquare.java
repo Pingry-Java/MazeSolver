@@ -48,5 +48,12 @@ public class MazeSquare extends Node
 	{
 		this.visited = visited; 
 	}
+	public char symbol()
+	{
+		if (slowness < 0)
+			return '#'; 
+		else
+			return '.';	
+	}
 	
 }
