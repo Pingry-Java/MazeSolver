@@ -105,4 +105,14 @@ public abstract class Maze implements Serializable{
 	  return width() + "X" + height() + " Maze.";
 	}
 	
+	//Modifiers for start and finish
+	protected void setStart(Node x)
+	{
+		start = x; 
+	}
+	
+	protected void setFinish(Node x)
+	{
+		finish = x; 
+	}
 }
