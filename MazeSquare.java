@@ -37,4 +37,12 @@ public class MazeSquare extends Node
 		return "(" + x + ", " + y + ")"; 
 	}
 	
+	public char symbol()
+	{
+		if (slowness < 0)
+			return '#'; 
+		else
+			return '.';	
+	}
+	
 }
