@@ -8,7 +8,10 @@ public class generateMaze extends Maze
 	{
 		super(new MazeSquare(1, 1, 1, true), new MazeSquare(1, 1, 1, true)); //just using super constructor from maze - starting Node: 1, 1, - will change finish later
 		dimensions = dim;
-		maze = new Node[dimensions][dimensions];
+		maze = new MazeSquare[dimensions][dimensions];
+		defaultMaze();
+		carveWalls(maze[1][1]);
+		
 	}
 	
 	private void defaultMaze()
@@ -27,17 +30,32 @@ public class generateMaze extends Maze
 		}
 	}
 	
-	private void carveWalls()
+	private void carveWalls(Node current)
 	{
+		MazeSquare next = eligible(current);
+		int x = next.getX();
+		int y = next.getY();
+		while(next != null)
+		{
+			((MazeSquare) (maze[x][y])).setSlowness(1);
+			((MazeSquare) (maze[x][y])).setVisited(true);
+			carveWalls(maze[x][y]);
+			next = eligible(current);
+			x = next.getX();
+			y = next.getY();
+		}
+		
+		
+		
 		
 	} 
-	public Node eligible(Node current)
+	public MazeSquare eligible(Node current)
 	{
 		List<Node> eligibleNeighbors = new ArrayList<Node>(); 
 		List<Node> neighbors = getNeighbors(current);
 		for(int i = 0; i< neighbors.size(); i++)
 		{
-			if (neighbors.get(i).getVisited())
+			if (((MazeSquare)neighbors.get(i)).getVisited())
 			{
 				neighbors.remove(i);
 				i--;
@@ -50,7 +68,7 @@ public class generateMaze extends Maze
 			visitedNeighbors = getNeighbors(neighbors.get(j));
 			for (int k = 0; k < visitedNeighbors.size(); k++)
 			{
-				if(visitedNeighbors.get(k).getVisited())
+				if(((MazeSquare)visitedNeighbors.get(k)).getVisited())
 				{
 					visitedNeighbors.remove(k);
 					k--; 	
@@ -62,7 +80,11 @@ public class generateMaze extends Maze
 			}
 		}
 		int random = (int) (Math.random() * eligibleNeighbors.size()); 
-		return eligibleNeighbors.get(random); 
+		if(eligibleNeighbors.size() == 0)
+		{
+			return null;
+		}
+		return (MazeSquare) eligibleNeighbors.get(random); 
 	}
 	
 	public Node getNodeByCoords(int x, int y)

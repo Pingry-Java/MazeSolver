@@ -43,7 +43,7 @@ public abstract class Node {
 	/**
 	 * Returns a string representation of a Node (x and y coordinates)
 	 */
-	 public abstract String toString(); 
-	 
-	 public abstract boolean getVisited(); 
+	public abstract String toString(); 
+
+	
 }
