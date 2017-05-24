@@ -109,3 +109,28 @@ Orndorff Absent. Good luck!
 * Status update?
 * Two new issues
 * Let's write some goals for today
+
+# Day 7
+
+* 4 work days left
+* Anyone want to try another group?
+* Each group give a ~2min status update
+
+## Final Goals
+
+* Generation group
+  * Generate a maze that has a start, finish, and 0 or more checkpoints.
+  * Create a maze that has interesting Nodes
+    * Actually use slowness and Danger
+* Solution group
+  * Solve Mazes that  have checkpoints
+  * Optimally solve mazes that have Danger and Slowness
+* GUI Group
+  * Actually display a Maze
+    * Use muscle on generation group
+    * Or Write their method yourself
+  * Display a solution
+* Everyone -- Readme
+  * Users want to know how to download, compile, run
+  * What buttons should users click?
+  * How about license?
