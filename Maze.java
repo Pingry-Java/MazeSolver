@@ -104,7 +104,6 @@ public abstract class Maze implements Serializable, Checkpointable{
 	public String toString() {
 	  return width() + "X" + height() + " Maze.";
 	}
-	
 
 	public void makeCheckpoints(int num)
 	{
@@ -119,5 +118,15 @@ public abstract class Maze implements Serializable, Checkpointable{
 				checkpoints.add(getNodeByCoords(randX, randY));
 			}
 		}
+
+	//Modifiers for start and finish
+	protected void setStart(Node x)
+	{
+		start = x; 
+	}
+	
+	protected void setFinish(Node x)
+	{
+		finish = x; 
 	}
 }
