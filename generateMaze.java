@@ -12,6 +12,17 @@ public class generateMaze extends Maze
 		defaultMaze();
 		carveWalls(maze[1][1]);
 		
+		//reset the finish line to an open space in the last row
+		int randomColumn = 0; 
+		while (true)
+		{
+			randomColumn = (int) (Math.random() * (dimensions - 2)) + 1; 
+			if (maze[dimensions - 2][randomColumn].slowness() > 0)
+			{
+				setFinish(maze[dimensions - 2][randomColumn]); 
+			}
+		}
+		
 	}
 	
 	private void defaultMaze()
@@ -33,21 +44,35 @@ public class generateMaze extends Maze
 	private void carveWalls(Node current)
 	{
 		MazeSquare next = eligible(current);
-		int x = next.getX();
-		int y = next.getY();
+		int x;
+		int y;
+		if(next == null)
+		{
+			x = 0;
+			y = 0;
+		}
+		else
+		{
+			x = next.getX();
+			y = next.getY();
+		}
 		while(next != null)
 		{
 			((MazeSquare) (maze[x][y])).setSlowness(1);
 			((MazeSquare) (maze[x][y])).setVisited(true);
 			carveWalls(maze[x][y]);
 			next = eligible(current);
-			x = next.getX();
-			y = next.getY();
+			if(next == null)
+			{
+				x = 0;
+				y = 0;
+			}
+			else
+			{
+				x = next.getX();
+				y = next.getY();
+			}
 		}
-		
-		
-		
-		
 	} 
 	public MazeSquare eligible(Node current)
 	{
@@ -100,6 +125,19 @@ public class generateMaze extends Maze
 	public int width()
 	{
 		return dimensions; 
+	}
+	
+	public void printMaze()
+	{
+		for(int i = 0; i < maze.length; i++)
+		{
+			for(int z = 0; z < maze[i].length; z++)
+			{
+				System.out.print(maze[i][z].symbol());
+			}
+			System.out.println();
+		}
+		
 	}
 	
 }

@@ -7,7 +7,7 @@ public class RandomMaze extends Maze
 	
 	public RandomMaze(int dimensions)
 	{
-		super(new MazeSquare(0, 1, 1, false), new MazeSquare(dimensions - 1, 2, 1, false)); 
+		super(new MazeSquare(0, 1, 1, true), new MazeSquare(dimensions - 1, 2, 1, true)); 
 		this.dimensions = dimensions; 
 		maze = new Node[dimensions][dimensions]; 
 		generate(); 
