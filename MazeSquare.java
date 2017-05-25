@@ -54,6 +54,6 @@ public class MazeSquare extends Node
 		if (slowness < 0)
 			return '#'; 
 		else
-			return '.';	
+			return 'O';	
 	}
 }
