@@ -1,7 +1,7 @@
 import java.util.*; 
 import java.io.Serializable;
 
-public abstract class Maze implements Serializable {
+public abstract class CheckpointableMaze implements Serializable, Checkpointable{
 	
 	private Node start;
 	private Node finish;
@@ -11,7 +11,7 @@ public abstract class Maze implements Serializable {
 	 * @param start The starting Node
 	 * @param finish The finishing Node
 	 */
-	 public Maze(Node start, Node finish)
+	 public CheckpointableMaze(Node start, Node finish)
 	 {
 	 	this.start = start; 
 	 	this.finish = finish; 
@@ -105,6 +105,25 @@ public abstract class Maze implements Serializable {
 	  return width() + "X" + height() + " Maze.";
 	}
 
+	
+	/** 
+	 * this method fills an arraylist of nodes representing the checkpoints of the maze
+	 * @param num  the number of checkpoints
+	 */
+	public void makeCheckpoints(int num)
+	{
+		while (num > 0)
+		{
+			int randX = (int) (Math.random() * width()); 
+			int randY = (int) (Math.random() * height());
+			
+			if (getNodeByCoords(randX, randY).slowness() > 0)
+			{
+				num--;
+				checkpoints.add(getNodeByCoords(randX, randY));
+			}
+		}
+    }
 
 	//Modifiers for start and finish
 	protected void setStart(Node x)
@@ -115,5 +134,14 @@ public abstract class Maze implements Serializable {
 	protected void setFinish(Node x)
 	{
 		finish = x; 
+	}
+	
+	/**
+	 * this method returns an arraylist of nodes representing the checkpoints of the maze
+	 * @return ArrayList of nodes
+	 */
+	public ArrayList<Node> getCheckpoints()
+	{
+		return checkpoints;
 	}
 }
