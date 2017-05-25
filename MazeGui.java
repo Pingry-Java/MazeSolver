@@ -8,7 +8,7 @@ import java.io.*;
 
 public class MazeGui{
 	public static void main(String[] args){
-		Maze maze = new SampleMaze(4, 4);
+		Maze maze = new RandomMaze(4);
 		GuiFrame frame = new GuiFrame("Test", maze);
 
 	}
