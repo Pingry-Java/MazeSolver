@@ -8,10 +8,8 @@ import java.io.*;
 public class GuiFrame extends JFrame {
 	private String mazeString; 
 	private Maze maze;
-	private JPanel panelLM = new JPanel();
-	private JPanel panelSM = new JPanel();
-	private JPanel panelSave = new JPanel();
-	private JPanel panelLoad = new JPanel();
+	private JPanel panel = new JPanel();
+	
 
 	public GuiFrame(String name, Maze maze){
 		super(name);
@@ -21,39 +19,42 @@ public class GuiFrame extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800,800);
-		setResizable(false);
+		setResizable(true);
 
-		add(panelLM);
-		add(panelSM);
-		add(panelSave);
-		add(panelLoad);
+		add(panel);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        panel.setLayout(new GridBagLayout());
 
 		JButton loadMaze = new JButton("Load Maze");
-		panelLM.setLayout(null);
-		loadMaze.setBounds(400, 700, 150, 50);
-		panelLM.add(loadMaze);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 2;
+        gbc.anchor = GridBagConstraints.SOUTH;
+		panel.add(loadMaze, gbc);
 		loadMaze.addActionListener(new LoadNewMaze());
 
 
-		DepthFirstMazeSolver solver = new DepthFirstMazeSolver(maze);
-		solver.path();
+		//DepthFirstMazeSolver solver = new DepthFirstMazeSolver(maze);
+		//solver.path();
 		JButton solveMaze = new JButton("Solve Maze");
-		panelSM.setLayout(null);
-		solveMaze.setBounds(600, 700, 150, 50);
-		panelSM.add(solveMaze);
-		//solveMaze.addActionListener(new SolveMaze(panel));	
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+		panel.add(solveMaze, gbc);
+		solveMaze.addActionListener(new SolveMaze(maze));	
 
 		JButton saveMaze = new JButton("Save Maze");
-		panelSave.setLayout(null);
-		saveMaze.setBounds(300, 600, 150, 50);
-		panelSave.add(saveMaze);
-		//loadNewMaze.addActionListener(new SaveMaze(panel));
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+		panel.add(saveMaze, gbc);
+		saveMaze.addActionListener(new SaveMaze(panel));
 
 		JButton loadSavedMaze = new JButton("Load Saved Maze");
-		panelLoad.setLayout(null);
-		loadSavedMaze.setBounds(500, 600, 150, 50);
-		panelLoad.add(loadSavedMaze);
-		//loadSavedMaze.addActionListener(new LoadSavedMaze(panel));	
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+		panel.add(loadSavedMaze, gbc);
+		loadSavedMaze.addActionListener(new LoadSavedMaze(panel));	
 
 
 		
@@ -79,7 +80,7 @@ public class GuiFrame extends JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			createMaze(panelLM);
+			createMaze(panel);
 		
 		}	
 	}
@@ -87,7 +88,7 @@ public class GuiFrame extends JFrame {
 	class LoadSavedMaze implements ActionListener
 	{ //TODO change code so this loads a saved maze
 		private JPanel panel;
-		public LoadSavedMaze(JPanel panel, String fileName)
+		public LoadSavedMaze(JPanel panel)
 		{
 			this.panel = panel; 
 		}
