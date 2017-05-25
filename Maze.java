@@ -1,7 +1,7 @@
 import java.util.*; 
 import java.io.Serializable;
 
-public abstract class Maze implements Serializable{
+public abstract class Maze implements Serializable, Checkpointable{
 	
 	private Node start;
 	private Node finish;
@@ -104,5 +104,29 @@ public abstract class Maze implements Serializable{
 	public String toString() {
 	  return width() + "X" + height() + " Maze.";
 	}
+
+	public void makeCheckpoints(int num)
+	{
+		while (num > 0)
+		{
+			int randX = (int) (Math.random() * width()); 
+			int randY = (int) (Math.random() * height());
+			
+			if (getNodeByCoords(randX, randY).slowness() > 0)
+			{
+				num--;
+				checkpoints.add(getNodeByCoords(randX, randY));
+			}
+		}
+
+	//Modifiers for start and finish
+	protected void setStart(Node x)
+	{
+		start = x; 
+	}
 	
+	protected void setFinish(Node x)
+	{
+		finish = x; 
+	}
 }
