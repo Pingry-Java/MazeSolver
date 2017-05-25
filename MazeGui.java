@@ -10,9 +10,6 @@ public class MazeGui{
 	public static void main(String[] args){
 		Maze maze = new SampleMaze(4, 4);
 		GuiFrame frame = new GuiFrame("Test", maze);
-		
-
-
 
 	}
 
