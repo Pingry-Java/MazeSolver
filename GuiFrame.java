@@ -16,7 +16,6 @@ public class GuiFrame extends JFrame {
 		this.maze = maze;
 		this.mazeString = "";
 
-		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800,800);
 		setResizable(true);
@@ -54,7 +53,9 @@ public class GuiFrame extends JFrame {
         gbc.gridx = 3;
         gbc.gridy = 0;
 		panel.add(loadSavedMaze, gbc);
-		loadSavedMaze.addActionListener(new LoadSavedMaze(panel));	
+		loadSavedMaze.addActionListener(new LoadSavedMaze(panel));
+        
+        setVisible(true);
 
 
 		
