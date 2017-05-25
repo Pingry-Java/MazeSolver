@@ -105,6 +105,11 @@ public abstract class Maze implements Serializable, Checkpointable{
 	  return width() + "X" + height() + " Maze.";
 	}
 
+	
+	/** 
+	 * this method fills an arraylist of nodes representing the checkpoints of the maze
+	 * @param num  the number of checkpoints
+	 */
 	public void makeCheckpoints(int num)
 	{
 		while (num > 0)
@@ -128,5 +133,14 @@ public abstract class Maze implements Serializable, Checkpointable{
 	protected void setFinish(Node x)
 	{
 		finish = x; 
+	}
+	
+	/**
+	 * this method returns an arraylist of nodes representing the checkpoints of the maze
+	 * @return ArrayList of nodes
+	 */
+	public ArrayList<Node> getCheckpoints()
+	{
+		return checkpoints;
 	}
 }
