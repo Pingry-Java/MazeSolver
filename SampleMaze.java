@@ -6,16 +6,16 @@ public class SampleMaze extends Maze
 	
 	public SampleMaze(int length, int width)
 	{
-		super(new MazeSquare(1, 0, 1), new MazeSquare(2, 3, 1)); 
+		super(new MazeSquare(1, 0, 1, true), new MazeSquare(2, 3, 1, true)); 
 		maze = new Node[length][width]; 
 		for(int r = 0; r < 4; r++)
 		{
 			for(int c = 0; c < 4; c++)
 			{
 				if((r == 0 && c != 1) || r == 3 || c == 0 || (c == 3 && r != 2))
-					maze[r][c] = new MazeSquare(r,c,-1);
+					maze[r][c] = new MazeSquare(r,c,-1, true);
 				else
-					maze[r][c] = new MazeSquare(r,c,1);
+					maze[r][c] = new MazeSquare(r,c,1, false);
 			}
 		}
 	}
