@@ -63,7 +63,6 @@ public class WidthFirstMazeSolver extends MazeSolution{
 		for (Node n:reversePath){
 			forwardPath.add(0,n);
 		}
-		
 		return forwardPath;	
 	}
 	
@@ -106,22 +105,22 @@ public class WidthFirstMazeSolver extends MazeSolution{
 		Node left = super.getMaze().getNeighbors(n).get(0);
 		
 		
-		if ((up!=null)&&(findDistance(up) > findDistance(n))){
+		if ((up!=null)&&(findDistance(up) < findDistance(n))&&(findDistance(up)!=-1)){
 			l.addAll(pathFinder(up));
 			return l;
 		}
 		
-		if ((right!=null)&&(findDistance(right) > findDistance(n))){
+		if ((right!=null)&&(findDistance(right) < findDistance(n))&&(findDistance(right)!=-1)){
 			l.addAll(pathFinder(right));
 			return l;
 		}
 		
-		if ((down!=null)&&(findDistance(down) > findDistance(n))){
+		if ((down!=null)&&(findDistance(down) < findDistance(n))&&(findDistance(down)!=-1)){
 			l.addAll(pathFinder(down));
 			return l;
 		}
 		
-		if ((left!=null)&&(findDistance(left) > findDistance(n))){
+		if ((left!=null)&&(findDistance(left) < findDistance(n))&&(findDistance(left)!=-1)){
 			l.addAll(pathFinder(left));
 			return l;
 		}
