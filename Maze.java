@@ -118,6 +118,7 @@ public abstract class Maze implements Serializable, Checkpointable{
 				checkpoints.add(getNodeByCoords(randX, randY));
 			}
 		}
+    }
 
 	//Modifiers for start and finish
 	protected void setStart(Node x)
