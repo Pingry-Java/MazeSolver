@@ -141,4 +141,13 @@ public abstract class Maze implements Serializable, Checkpointable{
 	{
 		return checkpoints.size() > 0;
 	}
+	
+	/**
+	 * this method adds one checkpoint based off of the given node
+	 * @param the node to be made a checkpoint
+	 */
+	public void addCheckpoint(Node cp)
+	{
+		checkpoints.add(cp);
+	}
 }

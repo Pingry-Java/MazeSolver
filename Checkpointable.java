@@ -20,4 +20,10 @@ public interface Checkpointable
 	 * @return boolean  if maze has checkpoints
 	 */
 	public boolean hasCheckpoints();
+	
+	/**
+	 * this method adds one checkpoint based off of the given node
+	 * @param the node to be made a checkpoint
+	 */
+	public void addCheckpoint(Node cp);
 }
