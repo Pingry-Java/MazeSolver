@@ -26,7 +26,6 @@ public class WidthFirstMazeSolver extends MazeSolution{
 	
 	public List<Node> path(){
 	
-	/*
 		if (super.getMaze().hasCheckpoints()){
 		
 			ArrayList<Node> l = new ArrayList<Node>();
@@ -36,17 +35,16 @@ public class WidthFirstMazeSolver extends MazeSolution{
 			
 			l.addAll(pointPath(super.getMaze().getStart(), checkpoints.get(0)));
 			
-			for (int i = 0; i < checkpoints.length()-1; i++){
+			for (int i = 0; i < checkpoints.size()-1; i++){
 				l.addAll(pointPath(checkpoints.get(i), checkpoints.get(i+1)));
 			}	
 				
-			l.addAll(pointPath(checkpoints.get(checkpoints.length()-1), super.getMaze().getFinish()));
+			l.addAll(pointPath(checkpoints.get(checkpoints.size()-1), super.getMaze().getFinish()));
 			
 			return l;
 			
 		}
 		
-	*/
 		return pointPath(super.getMaze().getStart(), super.getMaze().getFinish());
 		
 	}
