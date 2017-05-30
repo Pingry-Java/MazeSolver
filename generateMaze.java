@@ -93,6 +93,7 @@ public class generateMaze extends Maze
 		List<Node> neighbors = getNeighbors(current);
 		for(int i = 0; i< neighbors.size(); i++)
 		{
+			//Remove all visited neighbors from the list
 			if (((MazeSquare)neighbors.get(i)).getVisited())
 			{
 				neighbors.remove(i);
