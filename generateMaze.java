@@ -68,37 +68,20 @@ public class generateMaze extends Maze
 	 */
 	private void carveWalls(Node current)
 	{
+		((MazeSquare) current).setVisited(true);
 		MazeSquare next = eligible(current);
-		int x;
-		int y;
 		if(next == null)
 		{
-			x = 0;
-			y = 0;
-		}
-		else
-		{
-			x = next.getX();
-			y = next.getY();
+			return;
 		}
 		while(next != null)
 		{
-			((MazeSquare) (maze[x][y])).setSlowness(1);
-			((MazeSquare) (maze[x][y])).setVisited(true);
-			carveWalls(maze[x][y]); //recursive call 
+			next.setSlowness(1);
+			next.setVisited(true);
+			carveWalls(next);
 			next = eligible(current);
-			if(next == null)
-			{
-				x = 0;
-				y = 0;
-			}
-			else
-			{
-				x = next.getX();
-				y = next.getY();
-			}
 		}
-	} 
+	}
 	
 	/**
 	 * Looks for eligible neighbors, which is defined as a neighbor that has two unvisited neighbors
@@ -110,6 +93,7 @@ public class generateMaze extends Maze
 		List<Node> neighbors = getNeighbors(current);
 		for(int i = 0; i< neighbors.size(); i++)
 		{
+			//Remove all visited neighbors from the list
 			if (((MazeSquare)neighbors.get(i)).getVisited())
 			{
 				neighbors.remove(i);
