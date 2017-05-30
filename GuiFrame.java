@@ -2,8 +2,8 @@ import javax.swing.*;
 import javax.*;
 import java.awt.*;
 import java.awt.event.*;
-
 import java.io.*;
+import java.util.List;
 
 public class GuiFrame extends JFrame {
 	private String mazeString; 
@@ -15,6 +15,7 @@ public class GuiFrame extends JFrame {
 		super(name);
 		this.maze = maze;
 		this.mazeString = "";
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800,800);
@@ -35,13 +36,14 @@ public class GuiFrame extends JFrame {
 		loadMaze.addActionListener(new LoadNewMaze());
 
 
-		//DepthFirstMazeSolver solver = new DepthFirstMazeSolver(maze);
-		//solver.path();
+
 		JButton solveMaze = new JButton("Solve Maze");
         gbc.gridx = 1;
         gbc.gridy = 0;
 		panel.add(solveMaze, gbc);
 		solveMaze.addActionListener(new SolveMaze(maze));	
+
+
 
 		JButton saveMaze = new JButton("Save Maze");
         gbc.gridx = 2;
@@ -117,10 +119,24 @@ public class GuiFrame extends JFrame {
 		{
 			DepthFirstMazeSolver solver = new DepthFirstMazeSolver(maze);
 			solver.path();
+			for (int n = 0; n < maze.height(); n++){
+				for (int i = 0; i < maze.width(); i++){
+					if (in(maze.getNodeByCoords(n, i), solver.path())){
+					
+					}
+				}
+			}
 		}
 		
 	}	
-	
+	private boolean in(Node node, List<Node> l){
+		for (int n = 0; n <l.size(); n++){
+			if (node.equals(l.get(n))){
+				return true;
+			}
+		}
+		return false; 
+	}
 	
 	class SaveMaze implements ActionListener
 	{
@@ -131,16 +147,16 @@ public class GuiFrame extends JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-		
+		  
 		}	
 	}
 
 	public void createMaze(JPanel panel){
 		String answer = ""; 
 		answer += "<html>";
-		for (int n = 0; n < 4; n++)
+		for (int n = 0; n < maze.height(); n++)
 		{
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < maze.width(); i++)
 			{
 				answer += maze.getNodeByCoords(n, i).symbol();
 			}
