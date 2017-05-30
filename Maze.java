@@ -132,4 +132,13 @@ public abstract class Maze implements Serializable, Checkpointable{
 	{
 		return checkpoints;
 	}
+	
+	/**
+	 * this method checks if checkpoints exist in the maze
+	 * @return boolean  if maze has checkpoints
+	 */
+	public boolean hasCheckpoints()
+	{
+		return checkpoints.size() > 0;
+	}
 }
