@@ -106,12 +106,19 @@ public abstract class Maze implements Serializable, Checkpointable {
 	}
 
 
-	//Modifiers for start and finish
+	/**
+	 * Modifier for the start node
+	 * @param x The Node to be set
+	 */
 	protected void setStart(Node x)
 	{
 		start = x; 
 	}
 	
+	/**
+	 * Modifier for the finish node
+	 * @param x The Node to become the new finish node
+	 */ 
 	protected void setFinish(Node x)
 	{
 		finish = x; 
