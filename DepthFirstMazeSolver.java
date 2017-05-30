@@ -1,8 +1,26 @@
 import java.util.*;
+
+/**
+* This class solves a maze using a depth first algorithm. It brute forces every path in an
+* left, right, up, down order until it hits a dead end or the endpoint. If it hits a dead 
+* end, then it goes back to the last turn and makes a different turn. This does not return 
+* the fastest way to solve the maze, but it will get a working solution.
+* @author Jeremy Newman, Graham Matthews, Miro Bergam, and Lindsey Yu
+* @version 1.0
+*/
 public class DepthFirstMazeSolver extends MazeSolution
 {
-	
+	/**
+	* This is a private field that is an ArrayList and holds the Nodes that have been traveled
+	*/
 	private ArrayList<Node> traveled;
+	
+	/**
+	* This is a constructor for the DepthFirstMazeSolver
+	* Calls upon the super class MazeSolution with the parameter that is passed in which
+	* is a Maze. It also initializes the private field traveled with an empty ArrayList
+	* @param m The Maze that will be used to construct the maze solver around
+	*/
 	public DepthFirstMazeSolver(Maze m)
 	{
 		super(m);
