@@ -119,28 +119,22 @@ public class GuiFrame extends JFrame {
 		{
 			mazeString = "<html>";
 			DepthFirstMazeSolver solver = new DepthFirstMazeSolver(maze);
-			solver.path();
-			System.out.println(solver.path());
-			for (int q = 0; q < solver.path().size(); q++){
-				System.out.println(solver.path().get(q));
-				System.out.println("hello world");
-			}
+			List<Node> path = solver.path();
 			for (int n = 0; n < maze.height(); n++){
 				for (int i = 0; i < maze.width(); i++){
-					if (in(maze.getNodeByCoords(n, i), solver.path())){
+					if (in(maze.getNodeByCoords(n, i), path)){
 						mazeString += "G";
-						System.out.println("hello");
 					}
 					else{
 						mazeString += maze.getNodeByCoords(n, i).symbol();
 					}
 				}
-				mazeString += "</br>";
+				mazeString += "<br>";
 			}
 			mazeString += "</html>";
 			JLabel lab = new JLabel(mazeString);
 			panel.add(lab);
-			lab.setBounds(300, 300, 100, 100);
+			lab.setBounds(300, 600, 100, 100);
 		}
 		
 	}	
