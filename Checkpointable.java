@@ -14,4 +14,10 @@ public interface Checkpointable
 	 * @return ArrayList of nodes
 	 */
 	public ArrayList<Node> getCheckpoints();
+	
+	/**
+	 * this method checks if checkpoints exist in the maze
+	 * @return boolean  if maze has checkpoints
+	 */
+	public boolean hasCheckpoints();
 }
