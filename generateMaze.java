@@ -1,14 +1,26 @@
 import java.util.*; 
 
+/**
+ * This class generates a 2D array of Nodes to represent a maze according to our algorithm
+ */ 
 public class generateMaze extends Maze
 {
 	private int dimensions;
 	private Node[][] maze;
+	
+	/**
+	 * Makes a maze according to given dimensions
+	 * @param dim The dimensions of the maze
+	 */ 
 	public generateMaze(int dim)
 	{
-		super(new MazeSquare(1, 1, 1, true), new MazeSquare(1, 1, 1, true)); //just using super constructor from maze - starting Node: 1, 1, - will change finish later
+		//Use constructor from Maze 
+		super(null, null);
+		
 		dimensions = dim;
+		
 		maze = new MazeSquare[dimensions][dimensions];
+		
 		defaultMaze();
 		carveWalls(maze[1][1]);
 		
@@ -20,11 +32,16 @@ public class generateMaze extends Maze
 			if (maze[dimensions - 2][randomColumn].slowness() > 0)
 			{
 				setFinish(maze[dimensions - 2][randomColumn]); 
+				break; 
 			}
 		}
 		
 	}
 	
+	/**
+	 * Provides a default maze with outside walls being impassable and inside squares passable. 
+	 * Walls have already been visited and inner squares are unvisited
+	 */ 
 	private void defaultMaze()
 	{
 		for (int i = 0; i < maze.length; i++)
@@ -33,14 +50,22 @@ public class generateMaze extends Maze
 			{
 				if (i == 0 || j == 0 || i == dimensions - 1 || j == dimensions - 1) //outside walls
 					maze[i][j] = new MazeSquare(i, j, -1, true); //outside walls impassable and already visited
-				else if (i == 1 && j == 1)
-					maze[i][j] = new MazeSquare(i, j, 1, true); 
+				else if (i == 1 && j == 1) //the start
+				{
+					Node start = new MazeSquare(i, j, 1, true); 
+					maze[i][j] = start; 
+					setStart(start);  
+				}
 				else
 					maze[i][j] = new MazeSquare(i, j, -1, false); //rest of squares have not been visited
 			}
 		}
 	}
 	
+	/**
+	 * The recursive algorithm that uses eligible to carve walls in order to minimize open spaces
+	 * @param current The current Node that you are looking to carve walls around
+	 */
 	private void carveWalls(Node current)
 	{
 		MazeSquare next = eligible(current);
@@ -60,7 +85,7 @@ public class generateMaze extends Maze
 		{
 			((MazeSquare) (maze[x][y])).setSlowness(1);
 			((MazeSquare) (maze[x][y])).setVisited(true);
-			carveWalls(maze[x][y]);
+			carveWalls(maze[x][y]); //recursive call 
 			next = eligible(current);
 			if(next == null)
 			{
@@ -74,6 +99,11 @@ public class generateMaze extends Maze
 			}
 		}
 	} 
+	
+	/**
+	 * Looks for eligible neighbors, which is defined as a neighbor that has two unvisited neighbors
+	 * @param current The Node that you are looking for eligible neighbors 
+	 */ 
 	public MazeSquare eligible(Node current)
 	{
 		List<Node> eligibleNeighbors = new ArrayList<Node>(); 
@@ -112,21 +142,36 @@ public class generateMaze extends Maze
 		return (MazeSquare) eligibleNeighbors.get(random); 
 	}
 	
+	
+	/**
+	 * Gets a node in the 2D array
+	 */ 
 	public Node getNodeByCoords(int x, int y)
 	{
 		return maze[x][y]; 
 	}
 	
+	/**
+	 * Accessor for the height of the maze
+	 * @return The height of the maze
+	 */ 
 	public int height()
 	{
 		return dimensions; 
 	}
 	
+	/**
+	 * Accessor for the width of the maze
+	 * @return The width of the maze
+	 */ 
 	public int width()
 	{
 		return dimensions; 
 	}
 	
+	/**
+	 * Just for testing purpose
+	 */ 
 	public void printMaze()
 	{
 		for(int i = 0; i < maze.length; i++)
