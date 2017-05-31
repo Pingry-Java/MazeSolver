@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * This class generates a 2D array of Nodes to represent a maze according to our algorithm
  */ 
-public class generateMaze extends Maze
+public class GenerateMaze extends Maze
 {
 	private int dimensions;
 	private Node[][] maze;
@@ -12,7 +12,7 @@ public class generateMaze extends Maze
 	 * Makes a maze according to given dimensions
 	 * @param dim The dimensions of the maze
 	 */ 
-	public generateMaze(int dim)
+	public GenerateMaze(int dim)
 	{
 		//Use constructor from Maze 
 		super(null, null);
@@ -70,15 +70,16 @@ public class generateMaze extends Maze
 	{
 		((MazeSquare) current).setVisited(true);
 		MazeSquare next = eligible(current);
-		if(next == null)
-		{
-			return;
-		}
+
 		while(next != null)
 		{
 			next.setSlowness(1);
 			next.setVisited(true);
+			System.out.println("Heading down the stack.");
+			wip();
 			carveWalls(next);
+			System.out.println("Heading up the stack.");
+			wip();
 			next = eligible(current);
 		}
 	}
@@ -89,40 +90,60 @@ public class generateMaze extends Maze
 	 */ 
 	public MazeSquare eligible(Node current)
 	{
-		List<Node> eligibleNeighbors = new ArrayList<Node>(); 
+		// Get all the current nodes neighbors 
 		List<Node> neighbors = getNeighbors(current);
+
+		//Remove all visited neighbors from the list
 		for(int i = 0; i< neighbors.size(); i++)
 		{
-			//Remove all visited neighbors from the list
 			if (((MazeSquare)neighbors.get(i)).getVisited())
 			{
 				neighbors.remove(i);
 				i--;
 			}
+		}	
 			
-		}
-		List<Node> visitedNeighbors;
+		// A list hat will contain all eligible 1st gen neighbors
+		List<Node> eligibleNeighbors = new ArrayList<Node>();
+		
+		// List that will contain 2nd gen neighbors for one 1st gen neighbor at a time
+		List<Node> secondNeighbors;
+
+		// Loop through all the first gen neighbors, and determine whether they are eligible
 		for(int j = 0; j< neighbors.size(); j++)
 		{
-			visitedNeighbors = getNeighbors(neighbors.get(j));
-			for (int k = 0; k < visitedNeighbors.size(); k++)
+			// Whichever 1st gen neighbor we're working on this time through the loop
+			Node neighbor = neighbors.get(j);
+			
+			// Figure out all 2nd gen neighbors for the current 1st gen neighbor
+			secondNeighbors = getNeighbors(neighbor);
+			
+			// Remove all the second gen neighbors that are themselves visited
+			for (int k = 0; k < secondNeighbors.size(); k++)
 			{
-				if(((MazeSquare)visitedNeighbors.get(k)).getVisited())
+				if(((MazeSquare)secondNeighbors.get(k)).getVisited())
 				{
-					visitedNeighbors.remove(k);
+					secondNeighbors.remove(k);
 					k--; 	
 				}
 			}
-			if (visitedNeighbors.size() >= 2)
+			
+			// If there are enough 2nd gen neighbors, then this 1st gen neighbor is eligible
+			if (secondNeighbors.size() >= 2)
 			{
-				eligibleNeighbors.add(neighbors.get(j)); 
+				eligibleNeighbors.add(neighbor); 
 			}
 		}
-		int random = (int) (Math.random() * eligibleNeighbors.size()); 
+		
+		// If there are no eligible neighbors, we can't return one, so return null
+		// This will trigger the terminating case in carveWalls
 		if(eligibleNeighbors.size() == 0)
 		{
 			return null;
 		}
+		
+		// If there were eligible neighbors, return one of them at random
+		int random = (int) (Math.random() * eligibleNeighbors.size()); 
 		return (MazeSquare) eligibleNeighbors.get(random); 
 	}
 	
@@ -152,8 +173,9 @@ public class generateMaze extends Maze
 	{
 		return dimensions; 
 	}
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////	
 	/**
+	 * Prints the current maze using suggested characters.
 	 * Just for testing purpose
 	 */ 
 	public void printMaze()
@@ -168,5 +190,36 @@ public class generateMaze extends Maze
 		}
 		
 	}
+	/**
+	 * Simple main for testing. Creates a maze with size specified on the command line
+	 */
+	public static void main(String[] args) {
+		
+		int size;
+		
+		if (args.length == 1)
+			size = Integer.parseInt(args[0]);
+		else
+			size = 6;
+		
+		GenerateMaze m = new GenerateMaze(size);
+		m.printMaze();
+	
+	}
+	
+	/**
+	 * wip stands for work in progress. This just prints the maze and pauses until a key is pressed
+	 */
+	private void wip()
+ 	{ 
+ 	printMaze();
+        System.out.println("Press any key to continue...");
+        try
+        {
+            System.in.read();
+        }  
+        catch(Exception e)
+        {}  
+ }
 	
 }
