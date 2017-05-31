@@ -3,21 +3,62 @@ import javax.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class GuiFrame extends JFrame {
 	private String mazeString; 
 	private Maze maze;
 	private JPanel panel = new JPanel();
-	
+	private ArrayList<Maze> mazeList;
 
 	public GuiFrame(String name, Maze maze){
 		super(name);
+		try
+		{
+			FileInputStream fileIn = new FileInputStream(new File("SavedMazes.txt"));
+			ObjectInputStream objectIn = new ObjectInputStream(fileIn);	
+			mazeList = (ArrayList<Maze>)objectIn.readObject();
+			fileIn.close();
+		} catch (FileNotFoundException ex) 
+		{
+			mazeList = new ArrayList<Maze>();
+		} catch(IOException io)
+		{
+			System.out.println("io exception");
+		} catch (ClassNotFoundException c)
+		{
+			System.out.println("Maze class not found.");
+		}
 		this.maze = maze;
 		this.mazeString = "";
 		
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() 
+		{
+			public void windowClosing(WindowEvent e) 
+			{
+			//	FileOutputStream clearer = new FileOutputStream("SavedMazes.txt");
+		//		clearer.write(("").getBytes());
+		///		clearer.close();
+				try 
+				{
+				FileOutputStream saveMazeList = new FileOutputStream("SavedMazes.txt");
+				ObjectOutputStream listSaver = new ObjectOutputStream(saveMazeList);
+				listSaver.writeObject(getMazeList());
+				} catch(FileNotFoundException ex)
+				{
+					System.out.println("File not found");
+				} catch(IOException io)
+				{
+					System.out.println("io exception");
+				}
+				e.getWindow().dispose();
+			}
+		});
 		setSize(800,800);
 		setResizable(true);
 
@@ -65,7 +106,10 @@ public class GuiFrame extends JFrame {
 
 
 	}
-
+	public ArrayList<Maze> getMazeList()
+	{
+		return mazeList;
+	}
 	public Maze getMaze(){
 		return maze;
 	}
