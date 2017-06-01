@@ -12,7 +12,7 @@ public class GuiFrame extends JFrame {
 	private String mazeString; 
 	private Maze maze;
 	private JPanel panel = new JPanel();
-	private ArrayList<Maze> mazeList;
+	private ArrayList<Maze> mazeList = new ArrayList<Maze>();
 
 	public GuiFrame(String name, Maze maze){
 		super(name);
@@ -20,7 +20,11 @@ public class GuiFrame extends JFrame {
 		{
 			FileInputStream fileIn = new FileInputStream(new File("SavedMazes.txt"));
 			ObjectInputStream objectIn = new ObjectInputStream(fileIn);	
-			mazeList = (ArrayList<Maze>)objectIn.readObject();
+			ArrayList temp = (ArrayList)objectIn.readObject();
+			for (int i = 0; i < temp.size(); i++)
+			{
+				mazeList.add((Maze) temp.get(i)); 
+			}
 			fileIn.close();
 		} catch (FileNotFoundException ex) 
 		{
