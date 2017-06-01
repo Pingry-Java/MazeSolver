@@ -22,16 +22,16 @@ public class generateMaze extends Maze
 		maze = new MazeSquare[dimensions][dimensions];
 		
 		defaultMaze();
-		carveWalls(maze[1][1]);
+		carveWalls(maze[2][2]);
 		
 		//reset the finish line to an open space in the last row
 		int randomColumn = 0; 
 		while (true)
 		{
-			randomColumn = (int) (Math.random() * (dimensions - 2)) + 1; 
-			if (maze[dimensions - 2][randomColumn].slowness() > 0)
+			randomColumn = (int) (Math.random() * (dimensions - 3)) + 1; 
+			if (maze[dimensions - 3][randomColumn].slowness() > 0)
 			{
-				setFinish(maze[dimensions - 2][randomColumn]); 
+				setFinish(maze[dimensions - 3][randomColumn]); 
 				break; 
 			}
 		}
@@ -50,7 +50,7 @@ public class generateMaze extends Maze
 			{
 				if (i == 0 || j == 0 || i == dimensions - 1 || j == dimensions - 1) //outside walls
 					maze[i][j] = new MazeSquare(i, j, -1, true); //outside walls impassable and already visited
-				else if (i == 1 && j == 1) //the start
+				else if (i == 2 && j == 2) //the start
 				{
 					Node start = new MazeSquare(i, j, 1, true); 
 					maze[i][j] = start; 
@@ -113,7 +113,7 @@ public class generateMaze extends Maze
 					k--; 	
 				}
 			}
-			if (visitedNeighbors.size() >= 2)
+			if (visitedNeighbors.size() >= 3)
 			{
 				eligibleNeighbors.add(neighbors.get(j)); 
 			}
