@@ -75,11 +75,15 @@ public class GenerateMaze extends Maze
 		{
 			next.setSlowness(1);
 			next.setVisited(true);
+			
 			System.out.println("Heading down the stack.");
 			wip();
+			
 			carveWalls(next);
+			
 			System.out.println("Heading up the stack.");
 			wip();
+			
 			next = eligible(current);
 		}
 	}
@@ -90,19 +94,9 @@ public class GenerateMaze extends Maze
 	 */ 
 	public MazeSquare eligible(Node current)
 	{
-		// Get all the current nodes neighbors 
-		List<Node> neighbors = getNeighbors(current);
-
-		//Remove all visited neighbors from the list
-		for(int i = 0; i< neighbors.size(); i++)
-		{
-			if (((MazeSquare)neighbors.get(i)).getVisited())
-			{
-				neighbors.remove(i);
-				i--;
-			}
-		}	
-			
+		// Get all the current nodes unvisited neighbors 
+		List<Node> neighbors = getUnvisitedNeighbors(current);
+		
 		// A list hat will contain all eligible 1st gen neighbors
 		List<Node> eligibleNeighbors = new ArrayList<Node>();
 		
@@ -115,20 +109,10 @@ public class GenerateMaze extends Maze
 			// Whichever 1st gen neighbor we're working on this time through the loop
 			Node neighbor = neighbors.get(j);
 			
-			// Figure out all 2nd gen neighbors for the current 1st gen neighbor
-			secondNeighbors = getNeighbors(neighbor);
+			// Get all this 1st gen node's unvisited neighbor
+			secondNeighbors = getUnvisitedNeighbors(neighbor);
 			
-			// Remove all the second gen neighbors that are themselves visited
-			for (int k = 0; k < secondNeighbors.size(); k++)
-			{
-				if(((MazeSquare)secondNeighbors.get(k)).getVisited())
-				{
-					secondNeighbors.remove(k);
-					k--; 	
-				}
-			}
-			
-			// If there are enough 2nd gen neighbors, then this 1st gen neighbor is eligible
+			// If there are enough unvisited 2nd gen neighbors, then this 1st gen neighbor is eligible
 			if (secondNeighbors.size() >= 2)
 			{
 				eligibleNeighbors.add(neighbor); 
@@ -145,6 +129,27 @@ public class GenerateMaze extends Maze
 		// If there were eligible neighbors, return one of them at random
 		int random = (int) (Math.random() * eligibleNeighbors.size()); 
 		return (MazeSquare) eligibleNeighbors.get(random); 
+	}
+	
+	
+	/**
+	 * Returns all given Node's unvisited neighbors.
+	 */
+	public List<Node> getUnvisitedNeighbors(Node current)
+	{
+		List<Node> neighbors = getNeighbors(current);
+
+		//Remove all visited neighbors from the list
+		for(int i = 0; i< neighbors.size(); i++)
+		{
+			if (((MazeSquare)neighbors.get(i)).getVisited())
+			{
+				neighbors.remove(i);
+				i--;
+			}
+		}
+		
+		return neighbors;
 	}
 	
 	
@@ -173,10 +178,11 @@ public class GenerateMaze extends Maze
 	{
 		return dimensions; 
 	}
-///////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	/////// Everything below this line Just for testing purposes ///////////
+		
 	/**
 	 * Prints the current maze using suggested characters.
-	 * Just for testing purpose
 	 */ 
 	public void printMaze()
 	{
@@ -208,18 +214,20 @@ public class GenerateMaze extends Maze
 	}
 	
 	/**
-	 * wip stands for work in progress. This just prints the maze and pauses until a key is pressed
+	 * For step-by-step debugging
+	 * wip stands for work in progress.
+	 * This just prints the maze and pauses until a key is pressed
 	 */
 	private void wip()
  	{ 
- 	printMaze();
-        System.out.println("Press any key to continue...");
-        try
-        {
-            System.in.read();
-        }  
-        catch(Exception e)
-        {}  
- }
+	 	printMaze();
+		System.out.println("Press any key to continue...");
+		try
+		{
+		    System.in.read();
+		}  
+		catch(Exception e)
+		{}  
+	}
 	
 }
