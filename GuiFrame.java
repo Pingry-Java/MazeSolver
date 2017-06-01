@@ -9,6 +9,9 @@ import java.util.List;
 
 
 public class GuiFrame extends JFrame {
+	//serialVersionUID is just so that there is not a warning when implementing serializable
+	//it is used by the compiler so that the compiler knows it has imported the data for 
+	// any class it is trying to read from a file
 	private static final long serialVersionUID = 787L;
 	private String mazeString; 
 	private Maze maze;
