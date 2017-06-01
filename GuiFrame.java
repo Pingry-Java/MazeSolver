@@ -10,7 +10,6 @@ public class GuiFrame extends JFrame {
 	private Maze maze;
 	private JPanel panel = new JPanel();
 	
-
 	public GuiFrame(String name, Maze maze){
 		super(name);
 		this.maze = maze;
@@ -22,7 +21,8 @@ public class GuiFrame extends JFrame {
 		setResizable(true);
 
 		add(panel);
-        
+
+
         GridBagConstraints gbc = new GridBagConstraints();
         panel.setLayout(new GridBagLayout());
 
@@ -50,6 +50,8 @@ public class GuiFrame extends JFrame {
         gbc.gridy = 0;
 		panel.add(saveMaze, gbc);
 		saveMaze.addActionListener(new SaveMaze(panel));
+
+
 
 		JButton loadSavedMaze = new JButton("Load Saved Maze");
         gbc.gridx = 3;
@@ -120,21 +122,33 @@ public class GuiFrame extends JFrame {
 			mazeString = "<html>";
 			DepthFirstMazeSolver solver = new DepthFirstMazeSolver(maze);
 			List<Node> path = solver.path();
-			for (int n = 0; n < maze.height(); n++){
-				for (int i = 0; i < maze.width(); i++){
-					if (in(maze.getNodeByCoords(n, i), path)){
-						mazeString += "G";
-					}
-					else{
-						mazeString += maze.getNodeByCoords(n, i).symbol();
-					}
-				}
-				mazeString += "<br>";
+			if (path.size() <= 1){
+				JLabel noSolution = new JLabel("No Solution");
+				panel.add(noSolution);
+				noSolution.setBounds(400, 600, 200, 200);
 			}
-			mazeString += "</html>";
-			JLabel lab = new JLabel(mazeString);
-			panel.add(lab);
-			lab.setBounds(300, 600, 100, 100);
+			else{
+				for (int n = 0; n < maze.height(); n++){
+						for (int i = 0; i < maze.width(); i++){
+						if (maze.getNodeByCoords(n, i).equals(path.get(0)))
+							mazeString += "S";
+						else if (maze.getNodeByCoords(n, i).equals(path.get(path.size() - 1)))
+							mazeString += "F";
+						else if (in(maze.getNodeByCoords(n, i), path)){
+							mazeString += "-";
+						}
+						else{
+							mazeString += maze.getNodeByCoords(n, i).symbol();
+						}
+					}
+					mazeString += "<br>";
+				}
+				mazeString += "</html>";
+				JLabel lab = new JLabel(mazeString);
+				lab.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+				panel.add(lab);
+				lab.setBounds(600, 300, 200, 200);
+			}
 		}
 		
 	}	
@@ -163,18 +177,26 @@ public class GuiFrame extends JFrame {
 	public void createMaze(JPanel panel){
 		String answer = ""; 
 		answer += "<html>";
+		DepthFirstMazeSolver solver = new DepthFirstMazeSolver(maze);
+		List<Node> path = solver.path();
 		for (int n = 0; n < maze.height(); n++)
 		{
 			for (int i = 0; i < maze.width(); i++)
 			{
-				answer += maze.getNodeByCoords(n, i).symbol();
+				if (maze.getNodeByCoords(n, i).equals(path.get(0)))
+					answer += "S";
+				else if (maze.getNodeByCoords(n, i).equals(path.get(path.size() - 1)))
+					answer += "F";
+				else
+					answer += maze.getNodeByCoords(n, i).symbol();
 			}
 			answer += "<br>";
 		}
 		answer += "</html>";
 		JLabel lab = new JLabel(answer);
+		lab.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
 		panel.add(lab);
-		lab.setBounds(300, 300, 100, 100);
+		lab.setBounds(300, 300, 200, 200);
 	}
 
 
