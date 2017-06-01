@@ -9,6 +9,7 @@ import java.util.List;
 
 
 public class GuiFrame extends JFrame {
+	private static final long serialVersionUID = 787L;
 	private String mazeString; 
 	private Maze maze;
 	private JPanel panel = new JPanel();

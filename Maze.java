@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.Serializable;
 
 public abstract class Maze implements Serializable, Checkpointable {
-	
+	private static final long serialVersionUID = 278L;
 	private Node start;
 	private Node finish;
 	

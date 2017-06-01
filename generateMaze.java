@@ -5,6 +5,7 @@ import java.util.*;
  */ 
 public class generateMaze extends Maze
 {
+	private static final long serialVersionUID = 6762L;
 	private int dimensions;
 	private Node[][] maze;
 	
